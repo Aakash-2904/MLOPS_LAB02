@@ -2,7 +2,7 @@
 
 **Serverless ML on Google Cloud: ETL pipeline and Wine classifier with Cloud Run functions**
 
-This project implements the **Cloud Functions lab** from the Northeastern University MLOps course ([raminmohammadi/MLOps](https://github.com/raminmohammadi/MLOps/tree/main/Labs/GCP_Labs/CloudFunction_Labs/Lab2-CloudFunction_Setup)) end to end on Google Cloud Platform, with a different dataset and model, and adds a Streamlit front end for the deployed model.
+This project implements the **Cloud Functions lab** from the Northeastern University MLOps course ([raminmohammadi/MLOps](https://github.com/raminmohammadi/MLOps/tree/main/Labs/GCP_Labs/CloudFunction_Labs/Lab1-CloudFunction_Setup)) end to end on Google Cloud Platform, with a different dataset and model, and adds a Streamlit front end for the deployed model.
 
 It has two serverless components and one client:
 
@@ -31,7 +31,7 @@ flowchart LR
 
 ```
 .
-├── Lab2-CloudFunction_Setup/
+├── Lab1-CloudFunction_Setup/
 │   ├── main.py                  # ETL function: GCS -> BigQuery (entry point: hello_gcs)
 │   ├── schemas.yaml             # BigQuery table schemas, matched by file name
 │   ├── requirements.txt
@@ -111,10 +111,10 @@ The original lab lists only BigQuery Admin and Eventarc Event Receiver. The othe
 - Name: `etl-function`, region: `us-central1`, runtime: Python 3.11
 - Trigger: **Cloud Storage**, event type `google.cloud.storage.object.v1.finalized`, your bucket
 - Entry point: `hello_gcs`
-- Source: `main.py`, `requirements.txt` and `schemas.yaml` from `Lab2-CloudFunction_Setup/`
+- Source: `main.py`, `requirements.txt` and `schemas.yaml` from `Lab1-CloudFunction_Setup/`
 - Memory: 512 MiB
 
-**Or with gcloud**, from `Lab2-CloudFunction_Setup/`:
+**Or with gcloud**, from `Lab1-CloudFunction_Setup/`:
 
 ```bash
 gcloud functions deploy etl-function \
@@ -131,7 +131,7 @@ gcloud functions deploy etl-function \
 `streaming()` matches the uploaded file name against the table names in `schemas.yaml`, so the file name must contain `table_1`. The file must be newline-delimited JSON (one object per line), not a JSON array.
 
 ```bash
-gcloud storage cp Lab2-CloudFunction_Setup/table_1.json gs://PROJECT_ID-etl-bucket/
+gcloud storage cp Lab1-CloudFunction_Setup/table_1.json gs://PROJECT_ID-etl-bucket/
 gcloud functions logs read etl-function --gen2 --region=us-central1 --limit=30
 bq query --use_legacy_sql=false "SELECT * FROM staging.table_1"
 ```
@@ -160,7 +160,7 @@ On a cold start, `load_model()` finds no saved model in `/tmp`, so `train_and_sa
 
 **Console:** go to **Cloud Run > Write a function**, name it `wine-classifier`, choose an **HTTPS** trigger, allow unauthenticated invocations, select Python 3.11, set the entry point to `logfunction`, upload the files from `ML-Example/`, and set memory to 1 GiB and timeout to 120 seconds. The extra memory is needed because the model trains on the first request.
 
-**Or with gcloud**, from `Lab2-CloudFunction_Setup/ML-Example/`:
+**Or with gcloud**, from `Lab1-CloudFunction_Setup/ML-Example/`:
 
 ```bash
 gcloud functions deploy wine-classifier \
