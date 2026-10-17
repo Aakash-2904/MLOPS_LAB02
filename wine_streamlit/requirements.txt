@@ -1,0 +1,5 @@
+streamlit>=1.38
+requests
+numpy
+pandas
+scikit-learn

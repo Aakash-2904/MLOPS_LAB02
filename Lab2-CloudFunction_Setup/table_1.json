@@ -1,0 +1,2 @@
+{"id": 1, "first_name": "John", "last_name": "Doe", "dob": "1990-05-14", "addresses": [{"status": "current", "address": "123 Main St", "city": "Boston", "state": "MA", "zip": 2115, "numberOfYears": 3}]}
+{"id": 2, "first_name": "Priya", "last_name": "Shah", "dob": "1995-11-02", "addresses": [{"status": "current", "address": "45 Huntington Ave", "city": "Boston", "state": "MA", "zip": 2115, "numberOfYears": 1}, {"status": "previous", "address": "9 Elm St", "city": "Cambridge", "state": "MA", "zip": 2139, "numberOfYears": 2}]}

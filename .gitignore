@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Model artifacts (the function trains its own at runtime)
+*.joblib
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Credentials: never commit these
+*.json.key
+*-key.json
+.streamlit/secrets.toml
